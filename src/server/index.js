@@ -5,7 +5,7 @@ const portscanner = require('portscanner');
 const httpServer = require('http-server');
 
 const logger = require('./utils/logger');
-const { SERVER_PORT } = require('./shared-constants');
+// const { SERVER_PORT } = require('./shared-constants');
 const mediator = require('./mediator');
 const sourceWatcher = require('./source-watcher');
 
@@ -22,13 +22,15 @@ const setup = (options, devOptions) => {
     debugModeEnabled
   } = options;
 
+  const SERVER_PORT = clientPort + 1;
+
   logger.setDebugModeEnabled(debugModeEnabled);
 
   logger.fun(`>\n> Codecrumbs magic begins!\n>`);
   logger.info(`> started with options: ${JSON.stringify(options)}`);
 
   const PORT_IN_USE = 'open';
-  const HOST = '127.0.0.1';
+  const HOST = '0.0.0.0';
 
   validateProjectPath(projectDir, entryPoint);
 
